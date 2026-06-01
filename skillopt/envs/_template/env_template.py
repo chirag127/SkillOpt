@@ -44,7 +44,9 @@ class TemplateBenchmarkAdapter(EnvAdapter):
             seed=seed,
             limit=limit,
         )
-        # TODO: initialize benchmark-specific runtime options from kwargs
+        # TODO: initialize runtime options, e.g.
+        # self.max_retries = int(kwargs.get("max_retries", 3))
+        # self.timeout_s = int(kwargs.get("timeout_s", 120))
 
     def setup(self, cfg: dict) -> None:
         super().setup(cfg)

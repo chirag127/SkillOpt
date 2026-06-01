@@ -26,7 +26,8 @@ class TemplateBenchmarkDataLoader(SplitDataLoader):
 
         Return a list of normalized item dicts.
         """
-        # TODO: customize when your raw source format differs.
+        # TODO: parse your raw JSON/JSONL/CSV format and return list[dict]
+        # with deterministic "id" values.
         return super().load_raw_items(data_path)
 
     def load_split_items(self, split_path: str) -> list[dict]:
@@ -35,5 +36,5 @@ class TemplateBenchmarkDataLoader(SplitDataLoader):
 
         split_path points to train/, val/, or test/.
         """
-        # TODO: customize when each split directory has a custom layout.
+        # TODO: customize when split directories contain non-standard files.
         return super().load_split_items(split_path)

@@ -31,7 +31,7 @@ class MyBenchmarkDataLoader(SplitDataLoader):
 
     def load_raw_items(self, data_path: str) -> list[dict]:
         # For ratio mode, parse your source dataset from data_path.
-        # Return list[dict] where each item has at least a stable "id".
+        # Return list[dict] where each item has at least a unique, deterministic "id".
         return super().load_raw_items(data_path)
 
     def load_split_items(self, split_path: str) -> list[dict]:
@@ -65,7 +65,9 @@ class MyBenchmarkAdapter(EnvAdapter):
         return self.dataloader.build_eval_batch(env_num=env_num, split=split, seed=seed, **kwargs).payload
 
     def rollout(self, env_manager, skill_content: str, out_dir: str, **kwargs) -> list[dict]:
-        # Run target model on each item in env_manager and return list[dict].
+        # env_manager is the payload returned by build_train_env/build_eval_env
+        # (commonly list[dict] task items).
+        # Run target model on each item and return list[dict].
         # Required keys per row: "id", "hard" (0/1), "soft" (0.0-1.0)
         raise NotImplementedError
 
